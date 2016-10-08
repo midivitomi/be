@@ -13,16 +13,15 @@
 ActiveRecord::Schema.define(version: 20161008161004) do
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "competitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.integer  "league_id",  null: false
     t.integer  "season_id",  null: false
+    t.string   "title"
     t.date     "start_at",   null: false
     t.date     "end_at"
     t.datetime "created_at", null: false
@@ -32,7 +31,6 @@ ActiveRecord::Schema.define(version: 20161008161004) do
   end
 
   create_table "grounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.string   "title",      null: false
     t.integer  "city_id"
     t.datetime "created_at", null: false
@@ -41,36 +39,29 @@ ActiveRecord::Schema.define(version: 20161008161004) do
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "competitions_id", null: false
-    t.string   "title",           null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["competitions_id"], name: "index_groups_on_competitions_id", using: :btree
+    t.integer  "competition_id", null: false
+    t.string   "title",          null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["competition_id"], name: "index_groups_on_competition_id", using: :btree
   end
 
   create_table "leagues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key"
-    t.integer  "round_id",                   null: false
-    t.integer  "pos",                        null: false
+    t.integer  "round_id",   null: false
     t.integer  "group_id"
-    t.integer  "team1_id",                   null: false
-    t.integer  "team2_id",                   null: false
-    t.datetime "play_at",                    null: false
-    t.boolean  "postponed",  default: false, null: false
-    t.datetime "play_at_v2"
-    t.datetime "play_at_v3"
+    t.integer  "team1_id",   null: false
+    t.integer  "team2_id",   null: false
+    t.datetime "play_at",    null: false
     t.integer  "ground_id"
     t.integer  "city_id"
-    t.boolean  "home",       default: true,  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_matches_on_city_id", using: :btree
     t.index ["ground_id"], name: "index_matches_on_ground_id", using: :btree
     t.index ["group_id"], name: "index_matches_on_group_id", using: :btree
@@ -80,34 +71,29 @@ ActiveRecord::Schema.define(version: 20161008161004) do
   end
 
   create_table "rounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "event_id",   null: false
-    t.string   "title",      null: false
+    t.integer  "competition_id", null: false
+    t.string   "title",          null: false
     t.string   "title2"
-    t.date     "start_at",   null: false
+    t.date     "start_at",       null: false
     t.date     "end_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_rounds_on_event_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["competition_id"], name: "index_rounds_on_competition_id", using: :btree
   end
 
   create_table "seasons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "key",        null: false
     t.string   "title",      null: false
     t.string   "title2"
-    t.string   "synonyms"
-    t.integer  "country_id", null: false
     t.integer  "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_teams_on_city_id", using: :btree
-    t.index ["country_id"], name: "index_teams_on_country_id", using: :btree
   end
 
 end
