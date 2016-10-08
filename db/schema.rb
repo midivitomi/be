@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008161004) do
+ActiveRecord::Schema.define(version: 20161008222759) do
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",      null: false
@@ -19,13 +19,14 @@ ActiveRecord::Schema.define(version: 20161008161004) do
   end
 
   create_table "competitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "league_id",  null: false
-    t.integer  "season_id",  null: false
+    t.integer  "league_id",            null: false
+    t.integer  "season_id",            null: false
     t.string   "title"
-    t.date     "start_at",   null: false
+    t.date     "start_at",             null: false
     t.date     "end_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "level",      limit: 3
     t.index ["league_id"], name: "index_competitions_on_league_id", using: :btree
     t.index ["season_id"], name: "index_competitions_on_season_id", using: :btree
   end
