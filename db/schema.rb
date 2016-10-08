@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008152834) do
+ActiveRecord::Schema.define(version: 20161008161004) do
+
+  create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "key",        null: false
+    t.string   "title",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "competitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "key",        null: false
@@ -22,6 +29,15 @@ ActiveRecord::Schema.define(version: 20161008152834) do
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_competitions_on_league_id", using: :btree
     t.index ["season_id"], name: "index_competitions_on_season_id", using: :btree
+  end
+
+  create_table "grounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "key",        null: false
+    t.string   "title",      null: false
+    t.integer  "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_grounds_on_city_id", using: :btree
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
