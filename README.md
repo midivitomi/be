@@ -3,22 +3,10 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+##API
 
-* Ruby version
+`host http://78.47.61.50:8080/`
 
-* System dependencies
+###Competitions
+`[GET] /competitions` — get competitions list
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
