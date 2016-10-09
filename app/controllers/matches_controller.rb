@@ -2,7 +2,11 @@ class MatchesController < ApplicationController
   def index
     competitions = params[:competitions].split(',')
 
-    matches = Matche.where(group_id: competitions)
+    competitions = Competition.where(id: competitions)
+    matches = []
+    competitions.each do |item|
+      matches.push(item.matches.to_json)
+    end
 
     render json: matches
 
