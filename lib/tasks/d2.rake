@@ -98,7 +98,7 @@ namespace :d2 do
       team_2 = item.css(".sport__calendar__table__teams").text.squish.split(' – ')[1]
       play_at = item.css(".sport__calendar__table__date").text.squish
       ground = item.css(".sport__calendar__table__stadium > a").text.squish
-      city = item.css(".sport__calendar__table__stadium > text()").text.squish
+      city = item.css(".sport__calendar__table__stadium > text()").text.squish.gsub(/[()]/, "")
 
       unless team_1.nil? || team_2.nil?
         Match.create(
@@ -110,7 +110,7 @@ namespace :d2 do
           :team2_id => Team.find_by_title(team_2).id,
           :play_at => play_at,
           :ground_id => (Ground.find_by_title(ground) && Ground.find_by_title(ground).id),
-          :city => (City.find_by_title(city) && City.find_by_title(city).id)
+          :city_id => (City.find_by_title(city) && City.find_by_title(city).id)
         )
       end
     end
