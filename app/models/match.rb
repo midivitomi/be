@@ -5,6 +5,6 @@ class Match < ActiveRecord::Base
   belongs_to :group, optional: true
   belongs_to :round
 
-  belongs_to :ground
-  belongs_to :city
+  belongs_to :ground, optional: true
+  belongs_to :city, optional: true
 end
